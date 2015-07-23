@@ -50,20 +50,28 @@ get '/d20/?:num?' do
   num = number_to_roll(params[:num])
   roll = roll_results(num, 20)
 
-  high = roll.max
-  low = roll.min
+  if num > 1
+    high = roll.max
+    low = roll.min
 
-  json :roll => roll, :high => high, :low => low
+    json :roll => roll, :high => high, :low => low
+  else
+    json :roll => roll
+  end
 end
 
 get '/d100/?:num?' do
   num = number_to_roll(params[:num])
   roll = roll_results(num, 100)
 
-  high = roll.max
-  low = roll.min
+  if num > 1
+    high = roll.max
+    low = roll.min
 
-  json :roll => roll, :high => high, :low => low
+    json :roll => roll, :high => high, :low => low
+  else
+    json :roll => roll
+  end
 end
 
 private
