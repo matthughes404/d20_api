@@ -76,8 +76,8 @@ end
 
 private
 def number_to_roll(input)
-  num = 0
   num = input.to_i unless input.nil?
+  num ||= 1 # roll one by default
 
   num
 end
