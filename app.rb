@@ -6,44 +6,18 @@ before do
   content_type :json
 end
 
-get '/d4/?:num?' do
+get '/d100/?:num?' do
   num = number_to_roll(params[:num])
-  roll = roll_results(num, 4)
-  total = roll_total(roll)
+  roll = roll_results(num, 100)
 
-  json :roll => roll, :total => total
-end
+  if num > 1
+    high = roll.max
+    low = roll.min
 
-get '/d6/?:num?' do
-  num = number_to_roll(params[:num])
-  roll = roll_results(num, 6)
-  total = roll_total(roll)
-
-  json :roll => roll, :total => total
-end
-
-get '/d8/?:num?' do
-  num = number_to_roll(params[:num])
-  roll = roll_results(num, 8)
-  total = roll_total(roll)
-
-  json :roll => roll, :total => total
-end
-
-get '/d10/?:num?' do
-  num = number_to_roll(params[:num])
-  roll = roll_results(num, 10)
-  total = roll_total(roll)
-
-  json :roll => roll, :total => total
-end
-
-get '/d12/?:num?' do
-  num = number_to_roll(params[:num])
-  roll = roll_results(num, 12)
-  total = roll_total(roll)
-
-  json :roll => roll, :total => total
+    json :roll => roll, :high => high, :low => low
+  else
+    json :roll => roll
+  end
 end
 
 get '/d20/?:num?' do
@@ -60,18 +34,44 @@ get '/d20/?:num?' do
   end
 end
 
-get '/d100/?:num?' do
+get '/d12/?:num?' do
   num = number_to_roll(params[:num])
-  roll = roll_results(num, 100)
+  roll = roll_results(num, 12)
+  total = roll_total(roll)
 
-  if num > 1
-    high = roll.max
-    low = roll.min
+  json :roll => roll, :total => total
+end
 
-    json :roll => roll, :high => high, :low => low
-  else
-    json :roll => roll
-  end
+get '/d10/?:num?' do
+  num = number_to_roll(params[:num])
+  roll = roll_results(num, 10)
+  total = roll_total(roll)
+
+  json :roll => roll, :total => total
+end
+
+get '/d8/?:num?' do
+  num = number_to_roll(params[:num])
+  roll = roll_results(num, 8)
+  total = roll_total(roll)
+
+  json :roll => roll, :total => total
+end
+
+get '/d6/?:num?' do
+  num = number_to_roll(params[:num])
+  roll = roll_results(num, 6)
+  total = roll_total(roll)
+
+  json :roll => roll, :total => total
+end
+
+get '/d4/?:num?' do
+  num = number_to_roll(params[:num])
+  roll = roll_results(num, 4)
+  total = roll_total(roll)
+
+  json :roll => roll, :total => total
 end
 
 private
